@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:21.0.1
+    ports:
+      - 8080:8080
+    command: start-dev
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    volumes:
+      - .local/keycloak/:/opt/keycloak/data
+      # - ./keycloak-event-handler/target/keycloak-event-handler-1.0.0.jar:/opt/keycloak/providers/post-registration-event-handler.jar
+      # - ./my-keycloak-theme:/opt/keycloak/themes/my-keycloak-theme
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
